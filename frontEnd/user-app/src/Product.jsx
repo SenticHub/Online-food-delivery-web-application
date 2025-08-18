@@ -180,6 +180,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useCart } from './CartContext'; // Adjust path as needed
 
+const url = import.meta.env.VITE_BASE_URL;
 const Product = () => {
   const [allProducts, setAllProducts] = useState([]); // Store all products
   const [displayedProducts, setDisplayedProducts] = useState([]); // Products currently shown
@@ -198,7 +199,7 @@ const Product = () => {
   const getProducts = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:3000/food/getAllFoods`);
+      const response = await fetch(`${url}/food/getAllFoods`);
       const data = await response.json();
       console.log(13, data)
       setAllProducts(data);
@@ -216,7 +217,7 @@ const Product = () => {
 
   const getCategory = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/category/getAllCategory`)
+      const response = await fetch(`${url}/category/getAllCategory`)
       const data = await response.json()
       console.log(22, data)
       setCategories(data)
@@ -232,7 +233,7 @@ const Product = () => {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
       };
-      const response = await fetch(`http://localhost:3000/food/getAllFoodsByCategory/${id}`, requestOptions);
+      const response = await fetch(`${url}/food/getAllFoodsByCategory/${id}`, requestOptions);
       const data = await response.json();
       setAllProducts(data);
       setDisplayedProducts(data.slice(0, PRODUCTS_PER_PAGE));
@@ -257,7 +258,7 @@ const Product = () => {
         return;
       }
 
-      const response = await fetch(`http://localhost:3000/food/searchFood/${keyword}`);
+      const response = await fetch(`${url}/food/searchFood/${keyword}`);
       const data = await response.json();
       setAllProducts(data);
       setDisplayedProducts(data.slice(0, PRODUCTS_PER_PAGE));
@@ -321,7 +322,7 @@ const Product = () => {
       };
       console.log(61, cartData)
       try {
-        const response = await fetch("http://localhost:3000/cart/addCart", {
+        const response = await fetch(`${url}/cart/addCart`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(cartData),

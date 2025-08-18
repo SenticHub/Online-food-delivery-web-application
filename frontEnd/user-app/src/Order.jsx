@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-
+const url = import.meta.env.VITE_BASE_URL;
 const Order = () => {
   const [orders, setOrders] = useState([]);
   const userId = localStorage.getItem('id');
@@ -8,7 +8,7 @@ const Order = () => {
 
   const fetchOrders = async () => {
     try {
-      const res = await fetch(`http://localhost:3000/order/getOrdersByUser/${userId}`);
+      const res = await fetch(`${url}/order/getOrdersByUser/${userId}`);
       const json = await res.json();
       if (json.success) {
         setOrders(json.data);
@@ -23,7 +23,7 @@ const Order = () => {
   const handleReorder = async (cartItems) => {
     try {
       for (const item of cartItems) {
-        await fetch('http://localhost:3000/cart/addCart', {
+        await fetch(`${url}/cart/addCart`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

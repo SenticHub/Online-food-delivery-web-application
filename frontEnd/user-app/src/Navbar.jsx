@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useCart } from './CartContext'; // Adjust path as needed
-
+const url = import.meta.env.VITE_BASE_URL;
 const Navbar = () => {
   const [flag, setFlag] = useState(0)
   const [name, setName] = useState("")
@@ -9,7 +9,7 @@ const Navbar = () => {
   const { cartCount, getCartCount } = useCart(); // Use cart context
 
   const getusers = async (userid) =>{
-    const response = await fetch(`http://localhost:3000/user/getUserById/${userid}`)
+    const response = await fetch(`${url}/user/getUserById/${userid}`)
     const data = await response.json()
 
     //console.log(12,data)

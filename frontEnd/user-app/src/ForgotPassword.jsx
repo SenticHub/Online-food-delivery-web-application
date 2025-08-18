@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+const url = import.meta.env.VITE_BASE_URL;
 const ForgetPassword = () => {
   const [flag, setFlag] = useState(1);
   const [email, setEmail] = useState('');
@@ -33,7 +33,7 @@ const ForgetPassword = () => {
     setGeneratedOtp(randomOtp);
 
     try {
-      const response = await fetch('http://localhost:3000/user/send_otp', {
+      const response = await fetch(`${url}/user/send_otp`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ const ForgetPassword = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/user/updatePassword', {
+      const response = await fetch(`${url}/user/updatePassword`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

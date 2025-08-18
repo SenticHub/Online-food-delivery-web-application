@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from "react";
 import './Cart.css';
-
+const url = import.meta.env.VITE_BASE_URL;
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [user, setUser] = useState({});
@@ -16,7 +16,7 @@ const Cart = () => {
   }
   else{
   try {
-    const response = await fetch(`http://localhost:3000/cart/updateCart/${cartid}`, {
+    const response = await fetch(`${url}/cart/updateCart/${cartid}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
@@ -41,7 +41,7 @@ const Cart = () => {
   const fetchCartItems = async () => {
     try {
       const userId = localStorage.getItem('id')
-      const res = await fetch(`http://localhost:3000/cart/getCartByUser/${userId}`);
+      const res = await fetch(`${url}/cart/getCartByUser/${userId}`);
       const json = await res.json();
 
       if (json.success) {
@@ -62,7 +62,7 @@ const Cart = () => {
     if(confirm("are you sure to delete? "))
     {
        try {
-      const res = await fetch(`http://localhost:3000/cart/deleteCart/${_id}`, { method: 'DELETE' });
+      const res = await fetch(`${url}/cart/deleteCart/${_id}`, { method: 'DELETE' });
       const result = await res.json();
       console.log("Deleted:", result);
       //fetchCartItems(); // Refresh cart
@@ -73,8 +73,6 @@ const Cart = () => {
     }
    
   };
-
- 
 
   const loadScript = (src) => {
     return new Promise((resolve) => {
@@ -119,7 +117,7 @@ const addOrder = async (pid) =>{
       console.log("🚀 Order Data to Backend:", orderData);
 
       try {
-        const res = await fetch("http://localhost:3000/order/addOrder", {
+        const res = await fetch(`${url}/order/addOrder`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"

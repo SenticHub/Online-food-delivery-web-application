@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import './Registration.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+const url = import.meta.env.VITE_BASE_URL;
 const Registration = () => {
     const[userid, setUserId] = useState("")
     const[name, setName]=useState("")
@@ -23,7 +23,7 @@ const Registration = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(new_user)
         };
-        const response = await fetch('http://localhost:3000/user/addUser', requestOptions);
+        const response = await fetch(`${url}/user/addUser`, requestOptions);
         const data = await response.json();
 
         if(data._id!=null)

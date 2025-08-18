@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Login.css";
-
+const url = import.meta.env.VITE_BASE_URL;
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
+ 
   const login = async (e) => {
     e.preventDefault(); 
 
@@ -22,7 +23,7 @@ const Login = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:3000/user/loginUser", {
+      const response = await fetch(`${url}/user/loginUser`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(login_user),

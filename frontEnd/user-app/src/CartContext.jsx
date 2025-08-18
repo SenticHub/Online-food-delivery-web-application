@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const CartContext = createContext();
-
+const url = import.meta.env.VITE_BASE_URL;
 export const useCart = () => {
   const context = useContext(CartContext);
   if (!context) {
@@ -21,7 +21,7 @@ export const CartProvider = ({ children }) => {
         return;
       }
       
-      const res = await fetch(`http://localhost:3000/cart/getCartByUser/${userId}`);
+      const res = await fetch(`${url}/cart/getCartByUser/${userId}`);
       const json = await res.json();
       setCartCount(json.data.cartItems.length);
     } catch (error) {
