@@ -43,7 +43,7 @@ const Registration = () => {
   <ToastContainer />
   </div>
   <div className="container1" >
-    <h2>Registration Form</h2>
+    <h2>Register here</h2>
     <div>
       <div className="form-group">
         <label htmlFor="userId">UserId</label>
