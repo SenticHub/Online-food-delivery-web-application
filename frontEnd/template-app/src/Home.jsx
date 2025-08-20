@@ -12,9 +12,13 @@ import AddCategory from './AddCategory';
 import ManageCategory from './ManageCategory';
 import ManageProducts from './ManageProducts';
 import AddProducts from './AddProducts';
-import EditCategory from './EditCategory';
+// import EditCategory from './EditCategory';
 import AdminOrders from './AdminOrders';
 import AdminOrderDetails from './AdminOrderDetails';
+import EditProduct from './EditProduct';
+import Signin from './Signin';
+import Registration from './Registration';
+import ForgetPassword from './ForgotPassword';
 
 const Home = () => {
   return (
@@ -57,7 +61,7 @@ const Home = () => {
         <div className="nav-item dropdown">
           <a href="#" className="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i className="far fa-file-alt me-2" />Pages</a>
           <div className="dropdown-menu bg-transparent border-0">
-            <a href="signin.html" className="dropdown-item">Sign In</a>
+            <Link to="/signin" className="dropdown-item">Sign In</Link>
             <a href="signup.html" className="dropdown-item">Sign Up</a>
             <a href="404.html" className="dropdown-item">404 Error</a>
             <a href="blank.html" className="dropdown-item active">Blank Page</a>
@@ -165,27 +169,17 @@ const Home = () => {
         <Route path="/manageCategory" element={<ManageCategory></ManageCategory>}></Route>
         <Route path="/addProducts" element={<AddProducts></AddProducts>}></Route>
         <Route path="/manageProducts" element={<ManageProducts></ManageProducts>}></Route>
-        <Route path="/editCategory" element={<EditCategory></EditCategory>}></Route>
+        <Route path="/editProducts" element={<EditProduct></EditProduct>}></Route>
         <Route path="/adminOrders" element={<AdminOrders></AdminOrders>}></Route>
         <Route path="/adminOrderDetails" element={<AdminOrderDetails></AdminOrderDetails>}></Route>
+        <Route path="/signin"  element={<Signin></Signin>}></Route>
+        <Route path="/registration" element={<Registration></Registration>}></Route>
+        <Route path="/forgotpassword" element={<ForgetPassword></ForgetPassword>}></Route>
         
    </Routes>
     {/* Blank End */}
     {/* Footer Start */}
-    <div className="container-fluid pt-4 px-4">
-      <div className="bg-secondary rounded-top p-4">
-        <div className="row">
-          <div className="col-12 col-sm-6 text-center text-sm-start">
-            © <a href="#">Your Site Name</a>, All Right Reserved. 
-          </div>
-          <div className="col-12 col-sm-6 text-center text-sm-end">
-            {/*/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. *** /*/}
-            Designed By <a href="https://htmlcodex.com">HTML Codex</a>
-            <br />Distributed By: <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
-          </div>
-        </div>
-      </div>
-    </div>
+   
     {/* Footer End */}
   </div>
   {/* Content End */}

@@ -1,42 +1,78 @@
-import React from 'react'
-
+import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./Signin.css";
+const url = import.meta.env.VITE_BASE_URL;
 const Signin = () => {
-  return (
-        
-            <div className="container-fluid">
-            <div className="row h-100 align-items-center justify-content-center" style={{minHeight: '100vh'}}>
-                <div className="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
-                <div className="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
-                    <div className="d-flex align-items-center justify-content-between mb-3">
-                    <a href="index.html" className>
-                        <h3 className="text-primary"><i className="fa fa-user-edit me-2" />DarkPan</h3>
-                    </a>
-                    <h3>Sign In</h3>
-                    </div>
-                    <div className="form-floating mb-3">
-                    <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" />
-                    <label htmlFor="floatingInput">Email address</label>
-                    </div>
-                    <div className="form-floating mb-4">
-                    <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
-                    <label htmlFor="floatingPassword">Password</label>
-                    </div>
-                    <div className="d-flex align-items-center justify-content-between mb-4">
-                    <div className="form-check">
-                        <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                        <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
-                    </div>
-                    <a href>Forgot Password</a>
-                    </div>
-                    <button type="submit" className="btn btn-primary py-3 w-100 mb-4">Sign In</button>
-                    <p className="text-center mb-0">Don't have an Account? <a href>Sign Up</a></p>
-                </div>
-                </div>
-            </div>
-            </div>
-           
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
-  )
+ 
+  const login = async (e) => {
+    e.preventDefault(); 
+
+    if (!email || !password) {
+      toast.error("Please fill out all fields");
+      return;
+    }
+
+    const login_user = {
+      userid: email,
+      password: password,
+    };
+
+    try {
+      const response = await fetch(`${url}/user/loginUser`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(login_user),
+      });
+
+      const data = await response.json();
+      console.log(32,data)
+
+      if (data.length>0) {
+         toast("Login Success")
+         localStorage.setItem("id", data[0]._id)
+         window.location.href="/"
+      
+      } else {
+          toast("Login failed")
+          setMessage("");
+      }
+    } catch (error) {
+      toast.error("Server error. Please try again later.");
+    }
+  };
+
+
+  
+    return (
+      <div>
+        <ToastContainer />
+        <div className="split-form">
+            <div className="image-side">
+                <h2>Welcome Back!</h2>
+                <p>Enter your details to access your account</p>
+            </div>
+            <div className="form-side">
+                <h2>Sign In</h2>
+                <form >
+                <input type="email" placeholder="Email" required onChange={(e)=> setEmail(e.target.value)}/>
+                <input type="password" placeholder="Password" required onChange={(e) => setPassword(e.target.value)}/>
+                <button type="submit" onClick={login}>Login</button>
+                <a href="/forgotPassword">forgotPassword</a>
+                <p>{message}</p>
+                New user? <a href="/registration"> Register here</a>
+                
+                </form>
+            </div>
+        </div>
+
+
+      </div>
+    );
 }
 
 export default Signin

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+const url = import.meta.env.VITE_BASE_URL;
 const ManageProducts = () => {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
   const getProducts = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/food/getAllFoods`);
+      const response = await fetch(`${url}/food/getAllFoods`);
       const data = await response.json();
       setProducts(data);
     } catch (error) {
@@ -18,7 +18,7 @@ const ManageProducts = () => {
   const deleteProduct = async (id) => {
     if (window.confirm('Are you sure you want to delete this product?')) {
       try {
-        await fetch(`http://localhost:3000/food/deleteFood/${id}`, { method: 'DELETE' });
+        await fetch(`${url}/food/deleteFood/${id}`, { method: 'DELETE' });
         setProducts(products.filter(product => product._id !== id));
       } catch (error) {
         console.error('Error deleting product:', error);

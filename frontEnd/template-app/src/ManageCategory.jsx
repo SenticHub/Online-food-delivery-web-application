@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+const url = import.meta.env.VITE_BASE_URL;
 const ManageCategory = () => {
   const [categories, setCategories] = useState([])
 
@@ -7,7 +8,7 @@ const ManageCategory = () => {
 
 
   const getCategory = async () =>{
-    const response = await fetch(`http://localhost:3000/category/getAllCategory`)
+    const response = await fetch(`${url}/category/getAllCategory`)
     const data = await response.json()
 
     setCategories(data)
@@ -26,7 +27,7 @@ const ManageCategory = () => {
             headers: { 'Content-Type': 'application/json' },
             //body: JSON.stringify(new_user)
         };
-        const response = await fetch(`http://localhost:3000/category/deleteCategory/${id}`, requestOptions);
+        const response = await fetch(`${url}/category/deleteCategory/${id}`, requestOptions);
         const data = await response.json();
 
         setMessage(data)

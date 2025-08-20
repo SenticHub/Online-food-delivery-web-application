@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-
+const url = import.meta.env.VITE_BASE_URL;
 const AddProducts = () => {
   const [foodname, setFoodname] = useState("");
   const [price, setPrice] = useState("");
@@ -13,7 +13,7 @@ const AddProducts = () => {
   const [category, setCategory]=useState("");
    
    const getCategory = async () =>{
-    const response = await fetch(`http://localhost:3000/category/getAllCategory`)
+    const response = await fetch(`${url}/category/getAllCategory`)
     const data = await response.json()
 
     setCategories(data)
@@ -65,7 +65,7 @@ const AddProducts = () => {
         body: JSON.stringify(product)
     };
 
-    const response = await fetch("http://localhost:3000/food/addFood", requestOptions);
+    const response = await fetch(`${url}/food/addFood`, requestOptions);
     const data = await response.json();
 
     if (data._id != null) {

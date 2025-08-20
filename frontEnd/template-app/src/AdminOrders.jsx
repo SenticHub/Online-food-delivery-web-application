@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-
+const url = import.meta.env.VITE_BASE_URL;
 const AdminOrders = () => {
   const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
 
   const fetchAllOrders = async () => {
     try {
-      const res = await fetch(`http://localhost:3000/order/getAllOrders`); 
+      const res = await fetch(`${url}/order/getAllOrders`); 
       const json = await res.json();
       console.log(12, json);
       if (json.success) {

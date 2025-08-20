@@ -76,9 +76,10 @@ router.get('/getFoodById/:id', async (req, res) => {
 router.patch('/updateFood/:id', async (req, res) => {
     try {
         const id = req.params.id;
+        console.log(79,id);
         const updatedData = req.body;
         const options = { new: true };
-
+        console.log(81, updatedData);
         const result = await Food.findByIdAndUpdate(id, updatedData, options);
         res.send(result);
     } catch (error) {

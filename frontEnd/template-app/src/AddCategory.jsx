@@ -120,6 +120,7 @@
 import React, { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+const url = import.meta.env.VITE_BASE_URL;
 const AddCategory = () => {
   //const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState("");
@@ -136,7 +137,7 @@ const AddCategory = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(new_category)
     };
-    const response = await fetch('http://localhost:3000/category/addCategory', requestOptions);
+    const response = await fetch(`${url}/category/addCategory`, requestOptions);
     const data = await response.json();
 
     console.log(142,data)
