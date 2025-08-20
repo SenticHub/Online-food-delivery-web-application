@@ -62,12 +62,12 @@ const Navbar = () => {
             <span className="navbar-toggler-icon" />
           </button>
 
-          <div className="collapse navbar-collapse" id="navbarCollapse">
-            <div className="navbar-nav ms-auto p-4 p-lg-0">
+          <div className="collapse navbar-collapse justify-content-center" id="navbarCollapse">
+            <div className="navbar-nav p-4 p-lg-0">
               <Link to="/" className="nav-item nav-link active">Home</Link>
-              <Link to="/about" className="nav-item nav-link">About Us</Link>
+              {/* <Link to="/about" className="nav-item nav-link">About Us</Link> */}
               <Link to="/product" className="nav-item nav-link">Products</Link>
-              <div className="nav-item dropdown">
+              {/* <div className="nav-item dropdown">
                 <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                 <div className="dropdown-menu m-0">
                   <a href="blog.html" className="dropdown-item">Blog Grid</a>
@@ -75,8 +75,8 @@ const Navbar = () => {
                   <a href="testimonial.html" className="dropdown-item">Testimonial</a>
                   <a href="404.html" className="dropdown-item">404 Page</a>
                 </div>
-              </div>
-              <a href="contact.html" className="nav-item nav-link">Contact Us</a>
+              </div> */}
+              
             </div>
 
             <div className="d-none d-lg-flex ms-2">

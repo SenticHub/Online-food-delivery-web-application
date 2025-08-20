@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 const Home = () => {
   return (
     <div>
@@ -13,8 +13,8 @@ const Home = () => {
               <div className="row justify-content-start">
                 <div className="col-lg-7">
                   <h1 className="display-2 mb-5 animated slideInDown">Organic Food Is Good For Health</h1>
-                  <a href className="btn btn-primary rounded-pill py-sm-3 px-sm-5">Products</a>
-                  <a href className="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3">Services</a>
+                  <Link to="/product" className="btn btn-primary rounded-pill py-sm-3 px-sm-5">Products</Link>
+                  {/* <a href className="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3">Services</a> */}
                 </div>
               </div>
             </div>
