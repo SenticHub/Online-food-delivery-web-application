@@ -32,7 +32,7 @@ const Registration = () => {
             window.location.href = "/signin"
         }
         else{
-          toast("Register failed")
+          toast("Registration failed, try later")
         }
 
     }
