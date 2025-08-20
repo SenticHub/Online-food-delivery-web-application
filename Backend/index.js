@@ -18,9 +18,17 @@ const app = express();
 
 app.use(express.json());
 
+// app.use(cors({
+//     origin:'*'
+// }))
 app.use(cors({
-    origin:'*'
-}))
+  origin: [
+    "https://online-food-delivery-web-application-hi10.onrender.com",  // admin
+    "https://online-food-delivery-web-application-user.onrender.com"   // user
+  ],
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+  credentials: true
+}));
 const cart_controller = require('./Controller/cart_controller')
 app.use('/cart', cart_controller)
 
