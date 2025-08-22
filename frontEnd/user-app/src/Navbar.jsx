@@ -42,6 +42,7 @@ const closeMenu = () => {
       const bsCollapse = new window.bootstrap.Collapse(navbar, { toggle: false });
       bsCollapse.hide();
     }
+}
 //   return (
 //     <div>
 //       <div className="container-fluid fixed-top px-0 wow fadeIn" data-wow-delay="0.1s">
