@@ -76,10 +76,6 @@ const Navbar = () => {
                   <a href="404.html" className="dropdown-item">404 Page</a>
                 </div>
               </div> */}
-              
-            </div>
-
-            <div className="d-lg-flex ms-2">
               {
                 flag === 0 ? (
                   <Link to="/login" className="btn-sm-square bg-white rounded-circle ms-3">
@@ -101,8 +97,13 @@ const Navbar = () => {
                   </>
                 )
               }
-             
+              
             </div>
+{/* 
+            <div className="d-lg-flex ms-2">
+              
+             
+            </div> */}
           </div>
         </nav>
       </div>
