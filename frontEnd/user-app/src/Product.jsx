@@ -217,7 +217,7 @@ const Product = () => {
 
   const getCategory = async () => {
     try {
-      const response = await fetch(`${url}/category/getAllCategory`)
+      const response = await fetch(`https://online-food-delivery-web-application.onrender.com/category/getAllCategory`)
       console.log("category:",response)
       const data = await response.json()
       console.log(22, data)
