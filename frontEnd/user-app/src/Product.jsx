@@ -218,6 +218,7 @@ const Product = () => {
   const getCategory = async () => {
     try {
       const response = await fetch(`${url}/category/getAllCategory`)
+      console.log("category:",response)
       const data = await response.json()
       console.log(22, data)
       setCategories(data)
