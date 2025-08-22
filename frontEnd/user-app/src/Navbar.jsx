@@ -79,7 +79,7 @@ const Navbar = () => {
               
             </div>
 
-            <div className="d-none d-lg-flex ms-2">
+            <div className="d-lg-flex ms-2">
               {
                 flag === 0 ? (
                   <Link to="/login" className="btn-sm-square bg-white rounded-circle ms-3">
