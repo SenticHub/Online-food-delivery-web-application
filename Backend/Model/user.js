@@ -16,7 +16,12 @@ const dataSchema = new mongoose.Schema({
     contact: {
         required: true,
         type: String
-    }
+    },
+    currentLocation: {
+    lat: { type: Number, default: null },
+    lng: { type: Number, default: null },
+    updatedAt: { type: Date, default: null }
+  }
 })
 
 module.exports = mongoose.model('User', dataSchema)

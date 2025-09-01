@@ -216,4 +216,25 @@ router.delete('/deleteUser/:id', async(req, res) => {
     }
 })
 
+// Update user location
+router.put('/users/:id/location', async (req, res) => {
+  try {
+    const { lat, lng, updatedAt } = req.body;
+
+    const user = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: {
+          currentLocation: { lat, lng, updatedAt }
+        }
+      },
+      { new: true }
+    );
+
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 module.exports = router

@@ -9,61 +9,93 @@ router.get('/', (req, res) => {
 });
 
 
-// POST /addOrder
+// // POST /addOrder
+// router.post('/addOrder', async (req, res) => {
+//   try {
+//     const { userId, cartItems, summary, transactionId } = req.body;
+
+//     console.log("Backend 16: "+req.body)
+
+//     // Validate inputs
+//     if (!userId || !Array.isArray(cartItems) || cartItems.length === 0) {
+//       return res.status(400).json({ message: 'userId and cartItems are required' });
+//     }
+
+//     // Check if user already has an order
+//     // const existingOrders = await Order.find({ userId });
+//     // if (existingOrders.length > 0) {
+//     //   return res.status(200).json({ message: 'Already ordered' });
+//     // }
+
+//     // Prepare summary
+//     // let totalAmount = 0;
+//     // let totalQuantity = 0;
+
+//     // for (const item of cartItems) {
+//     //   const food = await Food.findById(item.foodId);
+//     //   if (!food || !food.availability) {
+//     //     return res.status(404).json({ message: `Food item not found or unavailable: ${item.foodId}` });
+//     //   }
+//     //   totalAmount += food.price * item.quantity;
+//     //   totalQuantity += item.quantity;
+//     // }
+
+  
+//     // Save the order
+//     const newOrder = new Order({
+//       userId,
+//       cartItems,
+//       summary, 
+//       transactionId
+//     });
+
+//     const savedOrder = await newOrder.save();
+
+//     if(savedOrder._id!=null)
+//     {
+//       await CartSchema.deleteMany({ userid: userId})
+//       res.status(200).json({ success: true, data: savedOrder });
+//     }
+//     else{
+//       res.status(500).json({ message: 'Something wrong, Order not placed, try later...!!!' });
+//     }
+    
+
+//   } catch (error) {
+//     console.error('Error in /addOrder:', error);
+//     res.status(500).json({ message: 'Server Error' });
+//   }
+// });
+// User places an order
 router.post('/addOrder', async (req, res) => {
   try {
     const { userId, cartItems, summary, transactionId } = req.body;
 
-    console.log("Backend 16: "+req.body)
-
-    // Validate inputs
     if (!userId || !Array.isArray(cartItems) || cartItems.length === 0) {
-      return res.status(400).json({ message: 'userId and cartItems are required' });
+      return res.status(400).json({ msg: 'userId and cartItems are required' });
     }
 
-    // Check if user already has an order
-    // const existingOrders = await Order.find({ userId });
-    // if (existingOrders.length > 0) {
-    //   return res.status(200).json({ message: 'Already ordered' });
-    // }
-
-    // Prepare summary
-    // let totalAmount = 0;
-    // let totalQuantity = 0;
-
-    // for (const item of cartItems) {
-    //   const food = await Food.findById(item.foodId);
-    //   if (!food || !food.availability) {
-    //     return res.status(404).json({ message: `Food item not found or unavailable: ${item.foodId}` });
-    //   }
-    //   totalAmount += food.price * item.quantity;
-    //   totalQuantity += item.quantity;
-    // }
-
-  
-    // Save the order
     const newOrder = new Order({
       userId,
       cartItems,
-      summary, 
-      transactionId
+      summary,
+      transactionId,
+      status: 'PENDING'
     });
 
     const savedOrder = await newOrder.save();
 
-    if(savedOrder._id!=null)
-    {
-      await CartSchema.deleteMany({ userid: userId})
-      res.status(200).json({ success: true, data: savedOrder });
-    }
-    else{
-      res.status(500).json({ message: 'Something wrong, Order not placed, try later...!!!' });
-    }
-    
+    // Clear user's cart
+    await CartSchema.deleteMany({ userid: userId });
 
-  } catch (error) {
-    console.error('Error in /addOrder:', error);
-    res.status(500).json({ message: 'Server Error' });
+    // Emit Socket event for drivers
+    const io = req.app.get('io');
+    io.emit('new_order', savedOrder);
+
+    res.status(201).json({ success: true, data: savedOrder });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: 'Order creation failed' });
   }
 });
 
