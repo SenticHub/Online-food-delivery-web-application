@@ -24,7 +24,6 @@ import { CartProvider } from './CartContext'
 import ForgetPassword from './ForgotPassword'
 import Order from './Order'
 import OrderDetails from './OrderDetails'
-import MapComponent from './MapComponent'
 import OrderTracking from './OrderTracking'
 import MapWithMarker from './MapWithMarker'
 
@@ -50,7 +49,6 @@ function App() {
       <Route path="/order" element={<Order></Order>}></Route>
       <Route path="/forgotPassword" element={<ForgetPassword></ForgetPassword>}></Route>
       <Route path="/orderDetails" element={<OrderDetails></OrderDetails>}></Route>
-      {/* <Route path="/mapcomponent" element={<MapComponent></MapComponent>}></Route> */}
       <Route path="/ordertracking" element={<OrderTracking></OrderTracking>}></Route>
       <Route path="/map" element={<MapWithMarker></MapWithMarker>}></Route>
       </Routes>
