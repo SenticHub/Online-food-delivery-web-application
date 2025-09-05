@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
-import MapComponent from "./MapComponent";
-
-const socket = io("http://localhost:3000"); // your backend server
+import MapWithMarker from "./MapWithMarker";
+const url=import.meta.env.VITE_BASE_URL;
+const socket = io(url); 
 
 function OrderTracking() {
   const [userCoords, setUserCoords] = useState(null);
@@ -32,7 +32,7 @@ function OrderTracking() {
   return (
     <div>
       <h2>Track Your Order</h2>
-      <MapComponent userCoords={userCoords} driverCoords={driverCoords} />
+      <MapWithMarker userCoords={userCoords} driverCoords={driverCoords} />
     </div>
   );
 }
