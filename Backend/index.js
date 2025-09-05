@@ -57,7 +57,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const http = require('http');
 const { Server } = require('socket.io');
-
+const PORT = process.env.PORT || 3000;
 const mongoString = process.env.DATABASE_URL;
 mongoose.connect(mongoString);
 const database = mongoose.connection;
@@ -80,7 +80,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// <<<<<<< HEAD
+
 app.use(cors({
     origin:'*'
 }))
@@ -92,8 +92,7 @@ app.use(cors({
 //   methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
 //   credentials: true
 // }));
-// =======
-// >>>>>>> 42f9de6 (Create driver side)
+
 const cart_controller = require('./Controller/cart_controller')
 app.use('/cart', cart_controller)
 
@@ -120,7 +119,7 @@ app.get('/', (req, res) => {
 });
 
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
     console.log(`Server Started at ${3000}`)
 })
 
